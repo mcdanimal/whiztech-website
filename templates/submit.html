@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name=""viewport" content="width=device-width", initial-scale="1.0">
+        <title>WhizTech Service Request</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+
+    <div class="form-container">
+        <h2>Submit a Service Request</h2>
+        <p>Upon submission, you will recieve an automatic confirmation by email.<br><br>A support specialist will contact you shortly afterward.</p>
+
+        <form action="/submit" method="POST">
+
+            <div class="form-group">
+                <label for="customer_fname">First Name</label>
+                <input type="text" id="customer_fname" name="customer_fname" required>
+                <label for="customer_lname">Last Name</label>
+                <input type="text" id="customer_lname" name="customer_lname">
+            </div>
+
+            <div class="form-group">
+                <label for="customer_email">Email Address</label>
+                <input type="email" id="customer_email" name="customer_email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="service_type">Service Type</label>
+                <select id="service_type" name="service_type">
+                    <option value="repair">Hardware Repair</option>
+                    <option value="software">Software Installation</option>
+                    <option valur="consultation">Consultation</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="details">Project Details</label>
+                <textarea id="details" name="details" rows="4" placeholder="What seems to be the problem, or how can we help?"></textarea>
+            </div>
+
+            <button type="submit">Submit Request</button>
+        </form>
+    </div>
+
+    </body>
+    </html>

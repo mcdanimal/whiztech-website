@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Request Received</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+        <div class="form-container" style="text-align: center;">
+            {% if name_in_html %}
+                <h2 style="color: green;">Thank you, {{ name_in_html }}!</h2>
+            {% else %}
+                <h2 style="color: green;">Thank you!</h2>
+            {% endif %}
+
+            <p>We have received your request! A confirmation email with your ticket number has been sent to you.<br>A WhizTech support specialist will reach out to you shortly.</p>
+            <br>
+            <a href="/">
+                <button>Submit Another Request</button>
+            </a>
+        </div>
+
+    </body>
+</html>

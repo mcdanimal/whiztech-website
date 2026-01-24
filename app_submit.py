@@ -52,9 +52,6 @@ def submit():
         print("Email sent successfully!")
     except Exception as e:
         print(f"Failed to send email: {e}")
-        print(f"DEBUG CHECK: Server is '{app.config['MAIL_SERVER']}'")
-        print(f"DEBUG CHECK: TLS is '{app.config['MAIL_USE_TLS']}'")
-        print(f"DEBUG CHECK: SSL is '{app.config['MAIL_USE_SSL']}'")
 
     return render_template('submit_success.html', name_in_html=full_name)
 

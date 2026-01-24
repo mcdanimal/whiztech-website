@@ -7,14 +7,14 @@ load_dotenv()
 
 app = Flask(__name__)
 
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] =465
-app.config['MAIL_USE_TLS'] = False
-app.config['MAIL_USE_SSL'] = True
+app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER_BR')
+app.config['MAIL_PORT'] = int(os.getenv('MAIL_PORT_BR'))
+app.config['MAIL_USE_TLS'] = os.getenv('MAIL_USE_TLS_BR') == 'True'
+app.config['MAIL_USE_SSL'] = os.getenv('MAIL_USE_SSL_BR') == 'True'
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME_BR')
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_SMTP_KEY_BR')
+app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_SENDER_G')
 
-app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
-app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
-app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_SENDER')
 
 mail = Mail(app)
 
@@ -44,7 +44,7 @@ def submit():
     {details}
     """
 
-    msg = Message(subject, recipients=[os.getenv("MAIL_SENDER")])
+    msg = Message(subject, recipients=[os.getenv("MAIL_SENDER_G")])
     msg.body = body
 
     try:
@@ -52,6 +52,9 @@ def submit():
         print("Email sent successfully!")
     except Exception as e:
         print(f"Failed to send email: {e}")
+        print(f"DEBUG CHECK: Server is '{app.config['MAIL_SERVER']}'")
+        print(f"DEBUG CHECK: TLS is '{app.config['MAIL_USE_TLS']}'")
+        print(f"DEBUG CHECK: SSL is '{app.config['MAIL_USE_SSL']}'")
 
     return render_template('submit_success.html', name_in_html=full_name)
 

@@ -25,5 +25,5 @@ class ServiceRequestForm(FlaskForm):
 
     details = TextAreaField('Details', validators=[
         DataRequired(),
-        Length(min=25, max=2500)
+        Length(min=25, max=2500, message="Please ensure the details are a minimum of 25 characters and a maximum of 2500")
     ])

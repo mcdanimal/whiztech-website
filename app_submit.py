@@ -111,15 +111,6 @@ def submit():
         return f"Form Errors: {form.errors}", 400
     
     return "Please submit the form from correct page.", 200
-    
-# ---TEMP DB INIT
-@app.route('/init-db-setup')
-def init_db_setup():
-    try:
-        db.create_all()
-        return "<h1>Success! Database tables created on Neon.</h1>"
-    except Exception as e:
-        return f"<h1>Error: {e}</h1>"
 
 if __name__ == '__main__':
     debug_mode = os.getenv('FLASK_DEBUG', 'False') == 'True'

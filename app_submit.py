@@ -12,7 +12,7 @@ load_dotenv()
 app = Flask(__name__)
 
 #--DB CONFIG
-db_url = os.getemv('DATABASE_URL', 'sqlite:///whiztech.db')
+db_url = os.getenv('DATABASE_URL', 'sqlite:///whiztech.db')
 
 if db_url.startswith("postgres://"):
     db_url = db_url.replace("postgres://", "postgresql://", 1)

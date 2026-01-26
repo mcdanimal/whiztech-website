@@ -14,7 +14,9 @@
                 <h2 style="color: green;">Thank you!</h2>
             {% endif %}
 
-            <p>We have received your request! A confirmation email with your ticket number has been sent to you.<br>A WhizTech support specialist will reach out to you shortly.</p>
+            <h3 style="color: blue;">Ticket # {{ ticket_id }}</h3>
+
+            <p>We have received your request! A confirmation email has been sent to <b>{{ email_in_html }}</b> .<br>A WhizTech support specialist will review your case and reach out to you shortly.</p>
             <br>
             <a href="/">
                 <button>Submit Another Request</button>

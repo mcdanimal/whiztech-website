@@ -1,8 +1,10 @@
 .venv/
 venv/
 ENV/
+instance/
 
 __pycache__/
 *.py[cod]
 
 .env
+.db

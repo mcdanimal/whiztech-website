@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <meta name=""viewport" content="width=device-width", initial-scale="1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>WhizTech Service Request</title>
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     </head>
@@ -12,19 +12,20 @@
         <h2>Submit a Service Request</h2>
         <p>Upon submission, you will recieve an automatic confirmation by email.<br><br>A support specialist will contact you shortly afterward.</p>
 
-        <form action="/submit" method="POST">
+        <form action="/submit" method="POST" id="serviceForm" novalidate>
             {{ form.csrf_token }}
 
             <div class="form-group">
                 <label for="customer_fname">First Name</label>
                 <input type="text" id="customer_fname" name="customer_fname" required>
                 <label for="customer_lname">Last Name</label>
-                <input type="text" id="customer_lname" name="customer_lname">
+                <input type="text" id="customer_lname" name="customer_lname" required>
             </div>
 
             <div class="form-group">
                 <label for="customer_email">Email Address</label>
                 <input type="email" id="customer_email" name="customer_email" required>
+                <span id="email-msg" class="validation-msg"></span>
             </div>
 
             <div class="form-group">
@@ -40,11 +41,92 @@
             <div class="form-group">
                 <label for="details">Project Details</label>
                 <textarea id="details" name="details" rows="4" placeholder="What seems to be the problem, or how can we help?"></textarea>
+                <span id="char-count" class="char-counter">0 / 2500</span>
+                <span id="details-msg" class="validation-msg"></span>
             </div>
 
-            <button type="submit">Submit Request</button>
+            <button type="submit" id="submitBtn" disabled>Submit Request</button>
         </form>
     </div>
+
+    <script>
+        const form = document.getElementById('serviceForm');
+        const emailInput = document.getElementById('customer_email');
+        const detailsInput = document.getElementById('details');
+        const submitBtn = document.getElementById('submitBtn');
+        const emailMsg = document.getElementById('email-msg');
+        const detailsMsg = document.getElementById('details-msg');
+        const charCounter = document.getElementById('char-count');
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        function validateForm() {
+            let isEmailValid = false;
+            let isDetailsValid = false;
+
+            if (emailRegex.test(emailInput.value)) {
+                isEmailValid = true;
+                emailInput.classList.remove('invalid');
+                emailInput.classList.add('valid');
+                emailMsg.textContent = "Valid email address";
+                emailMsg.className = "validation-msg success-text";
+            }
+            else {
+                isEmailValid = false;
+                if (emailInput.value.length > 0) {
+                    emailInput.classList.add('invalid');
+                    emailMsg.textContent = "Please enter a valid email (user@example.com)";
+                    emailMsg.className = "validation-msg error-text";
+                }
+                else {
+                    emailMsg.textContent = "";
+                }
+            }
+
+            const len = detailsInput.value.length;
+            charCounter.textContent = `${len} / 2500`;
+
+            if (len >= 25 && len <= 2500) {
+                isDetailsValid = true;
+                detailsInput.classList.remove('invalid');
+                detailsInput.classList.add('valid');
+                detailsMsg.textContent = "";
+                charCounter.style.color = "#28a745";
+            }
+            else {
+                isDetailsValid = false;
+                charCounter.style.color = len > 2500 ? "#dc3545" : "#666";
+
+                if (len > 0 && len < 25) {
+                    detailsMsg.textContent = `Please keep typing... (${25 - len} more characters needed)`;
+                    detailsMsg.className = "validation-msg error-text";
+                    detailsInput.classList.add('invalid');
+                }
+                else if (len > 2500) {
+                    detailsMsg.textContent = "Description is too long.";
+                    detailsMsg.className = "validation-msg error-text";
+                    detailsInput.classList.add('invalid');
+                }
+                else {
+                    detailsMsg.textContent = "";
+                    detailsInput.classList.remove('invalid');
+                }
+            }
+
+            if (isEmailValid && isDetailsValid) {
+            submitBtn.disabled = false;
+            submitBtn.innerText = "Submit Request";
+            }
+            else {
+                submitBtn.disabled = true;
+                submitBtn.innerText = "Please Complete Form";
+            }
+        }
+
+        emailInput.addEventListener('input', validateForm);
+        detailsInput.addEventListener('input', validateForm);
+        
+        validateForm();
+    </script>
 
     </body>
     </html>

@@ -18,8 +18,10 @@
             <div class="form-group">
                 <label for="customer_fname">First Name</label>
                 <input type="text" id="customer_fname" name="customer_fname" required>
+                <span id="fname-msg" class="validation-msg"></span>
                 <label for="customer_lname">Last Name</label>
                 <input type="text" id="customer_lname" name="customer_lname" required>
+                <span id="lname-msg" class="validation-msg"></span>
             </div>
 
             <div class="form-group">
@@ -51,17 +53,23 @@
 
     <script>
         const form = document.getElementById('serviceForm');
+        const fnameInput = document.getElementById('customer_fname');
+        const lnameInput = document.getElementById('customer_lname')
         const emailInput = document.getElementById('customer_email');
         const detailsInput = document.getElementById('details');
         const submitBtn = document.getElementById('submitBtn');
         const emailMsg = document.getElementById('email-msg');
         const detailsMsg = document.getElementById('details-msg');
+        const fnameMsg = document.getElementById('fname-msg');
+        const lnameMsg = document.getElementById('lname-msg');
         const charCounter = document.getElementById('char-count');
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         function validateForm() {
             let isEmailValid = false;
             let isDetailsValid = false;
+            let isFnameValid = false;
+            let isLnameValid = false;
 
             if (emailRegex.test(emailInput.value)) {
                 isEmailValid = true;
@@ -82,37 +90,79 @@
                 }
             }
 
-            const len = detailsInput.value.length;
-            charCounter.textContent = `${len} / 2500`;
+            const fnameLen = fnameInput.value.length;
+            
+            if (fnameLen >= 2 && fnameLen <= 50) {
+                isFnameValid = true;
+                fnameInput.classList.remove('invalid');
+                fnameInput.classList.add('valid');
+                fnameMsg.textContent = "Valid name";
+                fnameMsg.className = "validation-msg success-text";
+            }
+            else {
+                if (fnameLen > 0) {
+                    isFnameValid = false;
+                    fnameInput.classList.add('invalid');
+                    fnameMsg.textContent = "Please enter a valid name";
+                    fnameMsg.className = "validation-msg error-text";
+                }
+                else {
+                    fnameMsg.textContent = ""
+                }
+            }
 
-            if (len >= 25 && len <= 2500) {
+            const lnameLen = lnameInput.value.length;
+            
+            if (lnameLen >= 2 && lnameLen <= 50) {
+                isLnameValid = true;
+                lnameInput.classList.remove('invalid');
+                lnameInput.classList.add('valid');
+                lnameMsg.textContent = "Valid name";
+                lnameMsg.className = "validation-msg success-text";
+            }
+            else {
+                if (lnameLen > 0) {
+                    isLnameValid = false;
+                    lnameInput.classList.add('invalid');
+                    lnameMsg.textContent = "Please enter a valid name";
+                    lnameMsg.className = "validation-msg error-text";
+                }
+                else {
+                    lnameMsg.textContent = ""
+                }
+            }
+
+            const detailsLen = detailsInput.value.length;
+            charCounter.textContent = `${detailsLen} / 2500`;
+
+            if (detailsLen >= 25 && detailsLen <= 2500) {
                 isDetailsValid = true;
                 detailsInput.classList.remove('invalid');
                 detailsInput.classList.add('valid');
-                detailsMsg.textContent = "";
+                detailsMsg.textContent = "Valid message length";
+                detailsMsg.className = "validation-msg success-text"
                 charCounter.style.color = "#28a745";
             }
             else {
                 isDetailsValid = false;
-                charCounter.style.color = len > 2500 ? "#dc3545" : "#666";
+                charCounter.style.color = detailsLen > 2500 ? "#dc3545" : "#666";
 
-                if (len > 0 && len < 25) {
-                    detailsMsg.textContent = `Please keep typing... (${25 - len} more characters needed)`;
+                if (detailsLen > 0 && detailsLen < 25) {
+                    detailsMsg.textContent = `Please keep typing... (${25 - detailsLen} more characters needed)`;
                     detailsMsg.className = "validation-msg error-text";
                     detailsInput.classList.add('invalid');
                 }
-                else if (len > 2500) {
+                else if (detailsLen > 2500) {
                     detailsMsg.textContent = "Description is too long.";
                     detailsMsg.className = "validation-msg error-text";
                     detailsInput.classList.add('invalid');
                 }
                 else {
                     detailsMsg.textContent = "";
-                    detailsInput.classList.remove('invalid');
                 }
             }
 
-            if (isEmailValid && isDetailsValid) {
+            if (isEmailValid && isDetailsValid && isFnameValid && isLnameValid) {
             submitBtn.disabled = false;
             submitBtn.innerText = "Submit Request";
             }
@@ -124,6 +174,8 @@
 
         emailInput.addEventListener('input', validateForm);
         detailsInput.addEventListener('input', validateForm);
+        fnameInput.addEventListener('input', validateForm);
+        lnameInput.addEventListener('input', validateForm);
         
         validateForm();
     </script>

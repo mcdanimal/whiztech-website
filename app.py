@@ -62,40 +62,6 @@ def setup_device(token):
         return resp
     return "Invalid Token", 403
 
-# --- TEMP SETUP
-@app.route('/bootstrap-prod-db')
-def bootstrap_prod_db():
-    spsst = os.getenv('DK')
-    
-    if request.args.get('key') != spsst:
-        return "Access Denied", 403
-
-    new_user = request.args.get('u')
-    new_pass = request.args.get('p')
-
-    if not new_user or not new_pass:
-        return "Error: Missing credentials.", 400
-
-    try:
-        with app.app_context():
-            db.session.execute(text('DROP TABLE IF EXISTS admin_users'))
-            db.session.commit()
-
-        db.create_all()
-        
-        from models import AdminUsers
-        
-        if not AdminUsers.query.filter_by(admin_username=new_user).first():
-            u = AdminUsers(admin_username=new_user)
-            u.set_password(new_pass)
-            db.session.add(u)
-            db.session.commit()
-            return f"'{new_user}' added"
-        
-        return "user exists"
-    except Exception as e:
-        return f"Error: {e}"
-
 if __name__ == '__main__':
     debug_mode = os.getenv('FLASK_DEBUG', 'False') == 'True'
     app.run(debug=debug_mode)

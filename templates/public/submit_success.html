@@ -7,6 +7,14 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     </head>
     <body>
+        <nav class="navbar">
+            <a href="/" class="nav-brand">WhizTech</a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/about">About</a>
+                <a href="/submit">Submit Ticket</a>
+            </div>
+        </nav>
         <div class="form-container" style="text-align: center;">
             {% if name_in_html %}
                 <h2 style="color: green;">Thank you,<br>{{ name_in_html }}!</h2>
@@ -16,9 +24,9 @@
 
             <h3 style="color: blue;">Ticket # {{ ticket_id }}</h3>
 
-            <p>We have received your request! A confirmation email has been sent to <b>{{ email_in_html }}</b> .<br>A WhizTech support specialist will review your case and reach out to you shortly.</p>
+            <p style="color: #5a568b">We have received your request! A confirmation email has been sent to <b>{{ email_in_html }}</b> .<br>A WhizTech support specialist will review your case and reach out to you shortly.</p>
             <br>
-            <a href="/">
+            <a href="/submit">
                 <button>Submit Another Request</button>
             </a>
         </div>

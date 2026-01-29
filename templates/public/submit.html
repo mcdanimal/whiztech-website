@@ -7,10 +7,18 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     </head>
     <body>
+        <nav class="navbar">
+            <a href="/" class="nav-brand">WhizTech</a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/about">About</a>
+                <a href="/submit">Submit Ticket</a>
+            </div>
+        </nav>
 
     <div class="form-container">
         <h2>Submit a Service Request</h2>
-        <p>Upon submission, you will recieve an automatic confirmation by email.<br><br>A support specialist will contact you shortly afterward.</p>
+        <p style="color: #5a568b">Upon submission, you will recieve an automatic confirmation by email.</p>
 
         <form action="/submit" method="POST" id="serviceForm" novalidate>
             {{ form.csrf_token }}

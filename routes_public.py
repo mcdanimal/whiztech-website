@@ -9,8 +9,11 @@ public_bp = Blueprint('public', __name__)
 
 @public_bp.route('/')
 def home():
-    form = ServiceRequestForm()
-    return render_template('public/submit.html', form=form)
+    return render_template('public/index.html')
+
+@public_bp.route('/about')
+def about():
+    return render_template('public/about.html')
 
 @public_bp.route('/submit', methods=['GET', 'POST'])
 def submit():
@@ -60,7 +63,7 @@ def submit():
 
                 Thank you for choosing WhizTech! We have received your service request.
 
-                Your ticket number is {ticket_number}. Please keept this email and reference your ticket number when contacting WhizTech.
+                Your ticket number is {ticket_number}. Please keep this email and reference your ticket number when communicating with WhizTech.
 
                 A support specialist is reviewing your request and will reach out shortly.
 
@@ -73,14 +76,11 @@ def submit():
             mail.send(msg_customer)
             print("DEBUG: Customer confirmation email sent")
 
-            return render_template('submit_success.html', name_in_html=full_name, ticket_id=ticket_number, email_in_html=form.customer_email.data)
+            return render_template('public/submit_success.html', name_in_html=full_name, ticket_id=ticket_number, email_in_html=form.customer_email.data)
 
         except Exception as e:
             print(f"CRITICAL ERROR: {e}")
             db.session.rollback()
             return "Internal error.", 500
-    
-    if form.errors:
-        return f"Form Errors: {form.errors}", 400
-    
-    return "Please submit the form from correct page.", 200
+
+    return render_template('public/submit.html', form=form)

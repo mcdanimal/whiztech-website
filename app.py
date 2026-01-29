@@ -3,6 +3,7 @@ from flask import Flask, make_response, request
 from flask_mail import Mail
 from flask_login import LoginManager
 from dotenv import load_dotenv
+from sqlalchemy import text
 
 from extensions import db
 from models import AdminUsers
@@ -65,6 +66,7 @@ def setup_device(token):
 @app.route('/bootstrap-prod-db')
 def bootstrap_prod_db():
     spsst = os.getenv('DK')
+    
     if request.args.get('key') != spsst:
         return "Access Denied", 403
 
@@ -72,9 +74,13 @@ def bootstrap_prod_db():
     new_pass = request.args.get('p')
 
     if not new_user or not new_pass:
-        return "Error: Missing credentials", 400
+        return "Error: Missing credentials.", 400
 
     try:
+        with app.app_context():
+            db.session.execute(text('DROP TABLE IF EXISTS admin_users'))
+            db.session.commit()
+
         db.create_all()
         
         from models import AdminUsers
@@ -84,7 +90,7 @@ def bootstrap_prod_db():
             u.set_password(new_pass)
             db.session.add(u)
             db.session.commit()
-            return f"'{new_user}' added."
+            return f"'{new_user}' added"
         
         return "user exists"
     except Exception as e:

@@ -1,4 +1,4 @@
-from app_submit import app
+from app import app
 from extensions import db
 
 def init_database():

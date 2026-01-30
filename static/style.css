@@ -1,9 +1,20 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: rgb(15, 13, 30);
+    color: #c0bcd3;
+    margin: 0;
+    min-height: 100vh;
+    display: flex; 
+    flex-direction: column; /* This keeps footer at bottom */
+}
+
+/* Utility to center the forms on the page */
+.center-wrapper {
     display: flex;
     justify-content: center;
-    padding-top: 50px;
+    width: 100%;
+    padding: 0 20px; /* Prevent edge touching on mobile */
+    box-sizing: border-box;
 }
 
 .form-container {
@@ -14,35 +25,17 @@ body {
     width: 100%;
     max-width: 500px;
     border-top: 5px solid #007bff;
-    margin-top: 10px;
+    margin-top: 20px;
+    margin-bottom: 40px;
 }
 
-h1 {
-    text-align: center;
-    color: #e0deec;
-    margin-bottom: 20px;
-}
+h1 { text-align: center; color: #e0deec; margin-bottom: 20px; }
+h2 { text-align: center; color: #333; margin-bottom: 20px; margin-top: 5px; }
+p { color: #c0bcd3; }
+.form-container p { color: #5a568b; } /* Specific override for light cards */
 
-h2 {
-    text-align: center;
-    color: #333;
-    margin-bottom: 20px;
-    margin-top: 5px;
-}
-
-p {
-    color: #c0bcd3;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-label {
-    display: block;
-    margin-bottom: 5px;
-    color: #2d2b41;
-}
+.form-group { margin-bottom: 15px; }
+label { display: block; margin-bottom: 5px; color: #2d2b41; }
 
 input, select, textarea {
     width: 100%;
@@ -50,6 +43,7 @@ input, select, textarea {
     border: 1px solid #ddd;
     border-radius: 4px;
     box-sizing: border-box;
+    font-size: 16px; /* Prevents iOS zoom on focus */
 }
 
 button {
@@ -63,43 +57,17 @@ button {
     cursor: pointer;
     margin-top: 10px;
 }
+button:hover { background-color: #0056b3; }
+button:disabled { background-color: #cccccc; cursor: not-allowed; opacity: 0.7; }
 
-button:hover {
-    background-color: #0056b3;
-}
+/* Validation Colors */
+.error-text { color: #dc3545; font-size: 0.9em; }
+.success-text { color: #28a745; font-size: 0.9em; }
+.char-counter { font-size: 0.8em; color: #666; text-align: right; display: block; margin-top: 2px; }
+input.invalid, textarea.invalid { border-color: #dc3545; background-color: #fff8f8; }
+input.valid, textarea.valid { border-color: #28a745; }
 
-.error-text {
-    color: #dc3545;
-}
-
-.success-text {
-    color: #28a745;
-}
-
-.char-counter {
-    font-size: 0.8em;
-    color: #666;
-    text-align: right;
-    display: block;
-    margin-top: 2px;
-}
-
-input.invalid, textarea.invalid {
-    border-color: #dc3545;
-    background-color: #fff8f8;
-}
-
-input.valid, textarea.valid {
-    border-color: #38a745
-}
-
-button:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
-    opacity: 0.7;
-}
-
-/* --- LANDING PAGE --- */
+/* --- NAVBAR & HERO --- */
 .navbar {
     background-color: rgb(15, 13, 30);
     padding: 15px 30px;
@@ -114,22 +82,20 @@ button:disabled {
     box-sizing: border-box;
 }
 .nav-brand { font-weight: bold; font-size: 1.5em; color: #007bff; text-decoration: none; }
-.nav-links a { margin-left: 20px; text-decoration: none; color: #bcbcbc; font-weight: 500; }
+.nav-links a { margin-left: 20px; text-decoration: none; color: #bcbcbc; font-weight: 500; transition: color 0.3s; }
 .nav-links a:hover { color: #007bff; }
 
 .hero {
-    background: linear-gradient(135deg, #007bff, #0056b3); /* Professional Blue Gradient */
+    background: linear-gradient(135deg, #007bff, #0056b3);
     color: white;
-    padding: 100px 20px 75px; /* Top padding accounts for fixed navbar */
+    padding: 150px 20px 100px;
     text-align: center;
     margin-bottom: 50px;
-    border-radius: 0 0 50% 50% / 5%; /* Subtle curve at the bottom */
+    border-radius: 0 0 50% 50% / 5%;
 }
+.hero h1 { font-size: 3.5rem; margin-bottom: 20px; }
+.hero p { font-size: 1.25rem; opacity: 0.9; max-width: 600px; margin: 0 auto 40px; color: white; }
 
-.hero h1 { color: white; font-size: 3.5rem; margin-bottom: 20px; }
-.hero p { font-size: 1.25rem; opacity: 0.9; max-width: 600px; margin: 0 auto 40px; }
-
-/* CTA Button */
 .btn-cta {
     background-color: #ffc107;
     color: #333;
@@ -138,26 +104,21 @@ button:disabled {
     font-weight: bold;
     border-radius: 50px;
     font-size: 1.1rem;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.2s;
     display: inline-block;
 }
-.btn-cta:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-    background-color: #ffdb58;
-}
+.btn-cta:hover { transform: translateY(-3px); background-color: #ffdb58; }
 
 /* Services Grid */
-.container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; padding: 20px; width: 100%; box-sizing: border-box;}
 .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 50px; color: #e0deec; }
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
     margin-bottom: 80px;
 }
-
 .service-card {
     background: #e0deec;
     padding: 40px;
@@ -172,4 +133,54 @@ button:disabled {
 .service-card p { color: #333; line-height: 1.6; }
 
 /* Footer */
-footer { background: #333; color: #aaa; text-align: center; padding: 40px 20px; margin-top: auto; }
+footer { background: #333; color: #aaa; text-align: center; padding: 40px 20px; margin-top: auto; width: 100%; box-sizing: border-box;}
+
+/* --- MOBILE MENU (Hamburger) --- */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+.menu-toggle span {
+    height: 3px;
+    width: 25px;
+    background: #007bff;
+    margin-bottom: 4px;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+@media (max-width: 768px) {
+    .menu-toggle { display: flex; }
+    
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 60px; /* Navbar Height */
+        left: 0;
+        width: 100%;
+        background-color: rgb(15, 13, 30);
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
+        border-bottom: 2px solid #007bff;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    }
+    .nav-links.active { display: flex; }
+    .nav-links a { margin: 15px 0; font-size: 1.2rem; }
+    
+    .hero h1 { font-size: 2.5rem; }
+}
+
+/* --- LAYOUT UTILITIES --- */
+/* For standard pages (About, Submit) that need space for the fixed navbar */
+.layout-standard {
+    padding-top: 100px; 
+    display: block;
+}
+
+/* For the Landing Page (Home) that wants the hero section to touch the top */
+.layout-landing {
+    padding-top: 0;
+    display: block;
+}

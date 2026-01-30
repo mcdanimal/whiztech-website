@@ -1,24 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WhizTech | IT Solutions & Compliance</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body style="padding-top: 0; display: block;">
-    <nav class="navbar">
-        <a href="/" class="nav-brand">WhizTech</a>
-        <div class="nav-links">
-            <a href="/">Home</a>
-            <a href="/about">About</a>
-            <a href="/submit" style="color: #007bff; font-weight: bold;">Submit Ticket</a>
-        </div>
-    </nav>
+{% extends "public/base.html" %}
 
+{% block title %}WhizTech | IT Solutions & Compliance{% endblock %}
+
+{% block body_class %}layout-landing{% endblock %}
+
+{% block content %}
     <header class="hero">
         <h1>Technology, Simplified.</h1>
-        <p>Expert IT Support, Home Automation, High-Performance Custom Builds, and Home or Small Business Solutions for the Treasure Coast.</p>
+        <p>Expert IT Support, Home Automation, High-Performance Custom Builds, and Small Business Solutions for the Treasure Coast.</p>
         <a href="/submit" class="btn-cta">Open a Support Ticket</a>
     </header>
 
@@ -37,15 +26,8 @@
 
             <div class="service-card">
                 <h3>Network Solutions</h3>
-                <p>Stay connected and running with our tailored network services and products. From remote server access for your business, to basic home integrations, we get you plugged in using compliant and secure methods. </p>
+                <p>Stay connected with our tailored network services. From remote server access to smart home integrations, we get you plugged in securely.</p>
             </div>
         </div>
     </div>
-
-    <footer>
-        <p>&copy; 2026 WhizTech LLC. All rights reserved.</p>
-        <p style="font-size: 0.9em; margin-top: 10px;">Serving Port St. Lucie & The Treasure Coast</p>
-    </footer>
-
-</body>
-</html>
+{% endblock %}

@@ -1,29 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>About Us | WhizTech</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body style="padding-top: 100px; display: block;">
-    <nav class="navbar">
-        <a href="/" class="nav-brand">WhizTech</a>
-        <div class="nav-links">
-            <a href="/">Home</a>
-            <a href="/about">About</a>
-            <a href="/submit">Submit Ticket</a>
-        </div>
-    </nav>
+{% extends "public/base.html" %}
 
-    <div class="container" style="text-align: center; max-width: 800px;">
-        <h1>About WhizTech</h1>
-        <p style="font-size: 1.2em; margin-top: 20px;">
-            WhizTech is dedicated to providing top-tier technology solutions...
-        </p>
-        <p><i>(More content coming soon)</i></p>
+{% block title %}About Us | WhizTech{% endblock %}
 
-        <a href="/">
-                <button>Return to Homepage</button>
-            </a>
-    </div>
-</body>
-</html>
+{% block content %}
+<div class="container" style="text-align: center; max-width: 800px; color: #c0bcd3;">
+    <h1 style="margin-top: 40px;">About WhizTech</h1>
+    <p style="font-size: 1.2em; margin-top: 20px;">
+        WhizTech is dedicated to providing top-tier technology solutions...
+    </p>
+    <p><i>(More content coming soon)</i></p>
+
+    <a href="/">
+        <button style="max-width: 200px;">Return to Homepage</button>
+    </a>
+</div>
+{% endblock %}

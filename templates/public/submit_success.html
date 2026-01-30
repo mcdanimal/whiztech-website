@@ -1,35 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Request Received</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    </head>
-    <body>
-        <nav class="navbar">
-            <a href="/" class="nav-brand">WhizTech</a>
-            <div class="nav-links">
-                <a href="/">Home</a>
-                <a href="/about">About</a>
-                <a href="/submit">Submit Ticket</a>
-            </div>
-        </nav>
-        <div class="form-container" style="text-align: center;">
-            {% if name_in_html %}
-                <h2 style="color: green;">Thank you,<br>{{ name_in_html }}!</h2>
-            {% else %}
-                <h2 style="color: green;">Thank you!</h2>
-            {% endif %}
+{% extends "public/base.html" %}
 
-            <h3 style="color: blue;">Ticket # {{ ticket_id }}</h3>
+{% block title %}Request Received{% endblock %}
 
-            <p style="color: #5a568b">We have received your request! A confirmation email has been sent to <b>{{ email_in_html }}</b> .<br>A WhizTech support specialist will review your case and reach out to you shortly.</p>
-            <br>
-            <a href="/submit">
-                <button>Submit Another Request</button>
-            </a>
-        </div>
+{% block content %}
+<div class="center-wrapper">
+    <div class="form-container" style="text-align: center;">
+        {% if name_in_html %}
+            <h2 style="color: green;">Thank you,<br>{{ name_in_html }}!</h2>
+        {% else %}
+            <h2 style="color: green;">Thank you!</h2>
+        {% endif %}
 
-    </body>
-</html>
+        <h3 style="color: #007bff;">Ticket # {{ ticket_id }}</h3>
+
+        <p>We have received your request! A confirmation email has been sent to <b>{{ email_in_html }}</b>.</p>
+        <p>A WhizTech support specialist will review your case shortly.</p>
+        <br>
+        <a href="/submit">
+            <button>Submit Another Request</button>
+        </a>
+    </div>
+</div>
+{% endblock %}

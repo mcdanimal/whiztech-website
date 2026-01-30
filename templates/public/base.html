@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}WhizTech{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {% block head %}{% endblock %}
+</head>
+<body class="{% block body_class %}layout-standard{% endblock %}">
+    <nav class="navbar">
+        <a href="/" class="nav-brand">WhizTech</a>
+        
+        <div class="menu-toggle" id="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div class="nav-links" id="nav-links">
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/submit">Submit Ticket</a>
+        </div>
+    </nav>
+
+    {% block content %}{% endblock %}
+
+    {% block footer %}
+    <footer>
+        <p>&copy; 2026 WhizTech LLC. All rights reserved.</p>
+        <p style="font-size: 0.9em; margin-top: 10px;">Serving Port St. Lucie & The Treasure Coast</p>
+    </footer>
+    {% endblock %}
+
+    <script>
+        const menuBtn = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuBtn.classList.toggle('is-active');
+        });
+    </script>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>

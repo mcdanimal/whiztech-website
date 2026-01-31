@@ -184,3 +184,38 @@ footer { background: #333; color: #aaa; text-align: center; padding: 40px 20px; 
     padding-top: 0;
     display: block;
 }
+
+/* --- ADMIN PANEL STYLES --- */
+.admin-body {
+    background-color: #f4f6f9;
+    color: #333;
+    display: block;
+    padding-top: 0;
+}
+
+.admin-nav {
+    background: #1a1a2e;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.admin-nav a { color: #ccc; text-decoration: none; font-weight: bold; margin-left: 20px; transition: color 0.2s;}
+.admin-nav a:hover { color: white; }
+.admin-nav .brand { color: white; font-size: 1.2em; margin-left: 0; }
+
+.admin-container { max-width: 1000px; margin: 40px auto; padding: 20px; }
+
+/* Status Badges */
+.status-badge { display: inline-block; padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 0.85em; }
+.status-New { background-color: #e3f2fd; color: #0d47a1; border: 1px solid #0d47a1; }
+.status-In-Progress { background-color: #fff3e0; color: #e65100; border: 1px solid #e65100; }
+.status-Completed { background-color: #e8f5e9; color: #1b5e20; border: 1px solid #1b5e20; }
+.status-Waiting-for-Parts { background-color: #f3e5f5; color: #7b1fa2; border: 1px solid #7b1fa2; }
+.status-Cancelled { background-color: #ffebee; color: #c62828; border: 1px solid #c62828; }
+
+/* Flash Messages */
+.alert { padding: 15px; margin-bottom: 20px; border: 1px solid transparent; border-radius: 4px; }
+.alert-success { color: #155724; background-color: #d4edda; border-color: #c3e6cb; }
+.alert-error { color: #721c24; background-color: #f8d7da; border-color: #f5c6cb; }

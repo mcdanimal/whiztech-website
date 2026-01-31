@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}WhizTech Admin{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    {% block head %}{% endblock %}
+</head>
+<body class="admin-body">
+
+    <nav class="admin-nav">
+        <div style="display: flex; align-items: center;">
+            <a href="/admin/dashboard" class="brand">WhizTech Admin</a>
+        </div>
+        <div>
+            <a href="/admin/dashboard">Dashboard</a>
+            <a href="/" target="_blank">View Live Site ↗</a>
+            <a href="{{ url_for('admin.logout') }}" style="color: #ff6b6b;">Logout</a>
+        </div>
+    </nav>
+
+    <div class="admin-container">
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }}">
+                  {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </div>
+
+</body>
+</html>

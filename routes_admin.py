@@ -64,5 +64,29 @@ def dashboard():
 @admin_bp.route('/logout')
 @login_required
 def logout():
-    logout_user
+    logout_user()
     return redirect(url_for('admin.login'))
+
+@admin_bp.route('/ticket/<int:ticket_id>', methods=['GET', 'POST'])
+@login_required
+def ticket_detail(ticket_id):
+    # 1. Get the ticket from the DB (or 404 if not found)
+    ticket = ServiceRequest.query.get_or_404(ticket_id)
+
+    # 2. Handle the "Update" Button Click
+    if request.method == 'POST':
+        ticket.status = request.form.get('status')
+        ticket.admin_notes = request.form.get('admin_notes')
+        
+        try:
+            db.session.commit()
+            flash('Ticket updated successfully!', 'success')
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Error updating ticket: {e}', 'error')
+            
+        # Refresh the page to show changes
+        return redirect(url_for('admin.ticket_detail', ticket_id=ticket.id))
+
+    # 3. Show the Ticket Detail Page
+    return render_template('admin/ticket_detail.html', ticket=ticket)

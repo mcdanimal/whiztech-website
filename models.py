@@ -13,7 +13,9 @@ class ServiceRequest(db.Model):
     service_type = db.Column(db.String(50))
     details = db.Column(db.Text)
     date_created = db.Column(db.DateTime, default=lambda:datetime.now(timezone.utc))
-
+    status = db.Column(db.String(20), default='New')
+    admin_notes = db.Column(db.Text, nullable=True)
+    
     def __repr__(self):
         return f'<Request {self.id}>'
     

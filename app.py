@@ -37,6 +37,9 @@ app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME_BR')
 app.config['MAIL_PASSWORD'] = os.getenv('MAIL_SMTP_KEY_BR')
 app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_SENDER_G')
 app.config['SECRET_KEY'] = os.getenv('PK')
+app.config['SESSION_COOKIE_SECURE'] = True
+app.config['SESSION_COOKIE_HTTPONLY'] = True
+app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
 
 #--PLUGINS
 mail = Mail(app)

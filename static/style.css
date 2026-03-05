@@ -120,7 +120,7 @@ input.valid, textarea.valid { border-color: #28a745; }
     margin-bottom: 80px;
 }
 .service-card {
-    background: #e0deec;
+    background: #c5c1da;
     padding: 40px;
     border-radius: 12px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
